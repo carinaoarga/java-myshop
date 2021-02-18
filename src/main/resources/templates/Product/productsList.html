@@ -1,0 +1,65 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head th:replace="fragments/header :: html_head">
+    </head>
+    <body>
+    <div th:replace="fragments/header :: header"></div>
+        <a th:href="@{/products/add}">Add product</a>
+
+    <div class="container" th:fragment="productsListing(productsList)">
+        <div class="row">
+            <div th:each="product : ${productsList}" class="col-md-3 col-sm-6">
+                <div class="product-grid">
+                    <div class="product-image">
+                        <a href="#">
+                            <img class="pic-1" th:src="@{/img/No-image-available.jpg}">
+                            <img class="pic-2" th:src="@{/img/No-image-available.jpg}">
+                        </a>
+                        <ul class="social">
+                            <li><a href="#" data-tip="Quick View"> <i class="fa fa-search"></i></a></li>
+                        </ul>
+                    </div>
+
+                    <div class="product-content">
+                        <h3 class="title" th:text="${product.getName()}"></h3>
+                        <div class="price" th:text="${product.getPrice() + ' RON'}"></div>
+                        <a class="add-to-cart" th:href="@{/orders/add/{id}(id=${product.id})}">Adauga in cos</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <br>
+    <br>
+    <br>
+    <br>
+        <table class="table">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Description</th>
+                <th>Category</th>
+            </tr>
+            <tr th:each="product: ${productsList}">
+                <td th:text="${product.id}"></td>
+                <td th:text="${product.name}"></td>
+                <td th:text="${product.price}"></td>
+                <td th:text="${product.description}"></td>
+                <td th:text="${product.getCategory().getCategory()}"></td>
+                <td>
+                    <a th:href="@{/orders/add/{id}(id=${product.id})}">Adauga in cos</a>
+                    <a th:href="@{/products/update/{id}(id=${product.id})}">Update</a>
+                    <a th:href="@{/products/delete/{id}(id=${product.id})}">Delete</a>
+                    <a th:href="@{/products/{id}(id=${product.id})}">See</a>
+
+                </td>
+            </tr>
+        </table>
+
+    </body>
+</html>

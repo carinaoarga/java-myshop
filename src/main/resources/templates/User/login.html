@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/header :: html_head"></head>
+
+<body>
+    <div th:replace="fragments/header ::  header"></div>
+    <br>
+    <br>
+    <div class = "container">
+        <div class = "row">
+            <div class = "col-md-6 col-md-offset-3">
+
+                <h1>Logare</h1>
+                <form th:action="@{/users/login}" method="post">
+
+                    <!-- error message -->
+                    <div th:if="${param.error}">
+                        <div class="alert alert-danger">Email sau parola invalida.</div>
+                    </div>
+                    <!-- success message -->
+                    <div th:if="${param.required}">
+                        <div th:align="center" class="alert alert-info">E necesar sa te loghezi pentru a adauga produse in cos!</div>
+                    </div>
+
+                    <div class = "form-group">
+                        <label for ="username"> Email </label> :
+                        <input type="text" class = "form-control" id ="username" name = "username"
+                               placeholder="Email" autofocus="autofocus">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Parola</label>: <input type="password"
+                                                                       id="password" name="password" class="form-control"
+                                                                       placeholder="Parola" />
+                    </div>
+                    <div class="form-group">
+                        <input type="checkbox" name="remember-me" /> Vrei sa ramai logat?
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-6 col-sm-offset-3">
+                                <input type="submit" name="login-submit" id="login-submit"
+                                       class="form-control btn btn-primary" value="Logare" />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="form-group">
+                            <span>Utilizator nou? <a th:href="@{/users/register}">Inregistreaza-te aici</a></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

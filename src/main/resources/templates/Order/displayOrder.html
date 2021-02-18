@@ -1,0 +1,33 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:replace="fragments/header :: html_head"></head>
+
+<body>
+<div th:replace="fragments/header :: header"></div>
+<br>
+<br>
+<h1>Comanda mea</h1>
+<br>
+<br>
+<table class="table">
+    <tr>
+        <th>Produs</th>
+        <th>Cantitate</th>
+        <th>Pret</th>
+    </tr>
+    <tr th:each="orderProduct: ${session.currentOrder.getProductsInOrder()}">
+        <td th:text="${orderProduct.getProduct().getName()}"></td>
+        <td th:text="${orderProduct.quantity}"></td>
+        <td th:text="${orderProduct.getProduct().getPrice()*orderProduct.quantity}">
+    </tr>
+    <tr>
+        <td><b>TOTAL:</b></td>
+        <td></td>
+        <td  th:text="${session.currentOrder.getTotalOrderValue()}"></td>
+    </tr>
+</table>
+
+<a th:href="@{/orders/submitOrder}"><button class="form-control btn btn-primary">Trimite comanda</button></a>
+</body>
+</html>

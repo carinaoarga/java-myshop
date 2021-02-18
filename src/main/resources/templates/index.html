@@ -1,0 +1,17 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:replace="fragments/header :: html_head">
+</head>
+
+<body>
+    <div th:replace="fragments/header ::  header"></div>
+    <br>
+    <!-- success message -->
+    <div th:if="${param.successfulOrder}">
+        <div class="alert alert-info">Comanda a fost trimisa cu succes!</div>
+    </div>
+    <br>
+    <div th:replace="Product/productsList :: productsListing(productsList = ${productsList})"></div>
+</body>
+</html>

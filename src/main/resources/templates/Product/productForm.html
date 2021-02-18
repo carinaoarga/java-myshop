@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+    <head>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <form th:action="@{/products/add}" th:object="${product}" method="post">
+            <label for="name">Product name: </label>
+            <input type="text" th:field="*{name}" id="name" placeholder="Name">
+            <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</span><br/>
+
+            <label for="price">Price: </label>
+            <input type="number" th:field="*{price}" id="price" placeholder="price">
+            <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span><br/>
+
+            <label for="description">Description: </label>
+            <input type="text" th:field="*{description}" id="description">
+            <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span><br/>
+
+            <label for="category">Category: </label>
+            <select th:field="*{category}" id="category">
+                <option th:each="category : ${productCategories}" th:value="${category.getId()}" th:text="${category.getCategory()}"></option>
+            </select>
+            <span th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></span><br/>
+            <input type="submit" value="Add">
+        </form>
+    </body>
+</html>

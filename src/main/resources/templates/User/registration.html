@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head th:replace="fragments/header :: html_head"></head>
+<body>
+    <div th:replace="fragments/header ::  header"></div>
+    <br>
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+
+                <!-- success message -->
+                <div th:if="${param.success}">
+                    <div class="alert alert-info">Te-ai inregistrat cu succes!</div>
+                </div>
+
+                <h1>Inregistrare</h1>
+
+                <form th:action="@{/users/register}" method="post" th:object="${user}">
+                    <div class="form-group">
+                        <label class="control-label" for="firstname">Prenume: </label>
+                        <input id="firstname" class="form-control" th:field="*{firstname}"
+                               required autofocus="autofocus" />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label" for="lastname">Nume: </label> <input
+                            id="lastname" class="form-control" th:field="*{lastname}"
+                            required autofocus="autofocus" />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label" for="email">Email: </label> <input
+                            id="email" class="form-control" th:field="*{email}" required
+                            autofocus="autofocus" />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label" for="password">Parola: </label> <input
+                            id="password" class="form-control" type="password"
+                            th:field="*{password}" required autofocus="autofocus" />
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success">Inregistreaza-te</button>
+                        <span>Esti deja utilizator inregistrat? <a href="/" th:href="@{/users/login}">Logheaza-te aici!</a></span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</body>
+</html>
